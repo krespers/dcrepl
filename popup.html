@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>디시 나만보이는메모장</title>
+    <style>
+      :root { color-scheme: light dark; font: 13px/1.5 -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif; }
+      * { box-sizing: border-box; }
+      [hidden] { display: none !important; }
+      body { width: 300px; margin: 0; padding: 18px; color: #242936; background: #fff; }
+      .brand { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
+      .brand-icon { flex: none; width: 34px; height: 34px; }
+      h1 { margin: 0 0 2px; color: #35458a; font-size: 20px; }
+      .slogan { margin: 0; color: #777f90; font-size: 12px; }
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid #dce0e7; }
+      .row label { font-weight: 700; }
+      select { min-width: 95px; padding: 5px; border: 1px solid #c6cad4; border-radius: 3px; color: inherit; background: inherit; font: inherit; }
+      .switch { position: relative; width: 42px; height: 24px; padding: 0; border: 0; border-radius: 20px; background: #9aa0ad; cursor: pointer; }
+      .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .15s; }
+      .switch[aria-checked="true"] { background: #3b4890; }
+      .switch[aria-checked="true"]::after { transform: translateX(18px); }
+      .help { margin: 13px 0 0; color: #6d7483; font-size: 12px; }
+      .records { padding-top: 12px; border-top: 1px solid #dce0e7; }
+      .records strong { display: block; margin-bottom: 3px; }
+      .records p { margin: 0 0 10px; color: #6d7483; font-size: 12px; }
+      .record-actions { display: flex; gap: 7px; }
+      .delete, .cancel { padding: 7px 9px; border-radius: 3px; font: inherit; cursor: pointer; }
+      .delete { border: 1px solid #a83248; color: #a83248; background: transparent; }
+      .delete:hover { background: #a8324815; }
+      .delete:disabled { opacity: .5; cursor: default; }
+      .cancel { border: 1px solid #c6cad4; color: inherit; background: transparent; }
+      .status { min-height: 18px; margin: 8px 0 0; color: #a52b40; font-size: 12px; }
+      @media (prefers-color-scheme: dark) {
+        body { color: #dedee2; background: #1c1c1e; }
+        h1 { color: #a6b2fb; }
+        .slogan, .help { color: #a0a0a8; }
+        .row { border-color: #45454a; }
+        select { border-color: #606067; }
+        .switch[aria-checked="true"] { background: #6574d1; }
+        .records { border-color: #45454a; }
+        .records p { color: #a0a0a8; }
+        .delete { color: #ec8497; border-color: #a94d60; }
+        .cancel { border-color: #606067; }
+      }
+    </style>
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <div class="brand">
+      <img id="brand-icon" class="brand-icon" src="icons/icon-on.svg" alt="">
+      <div>
+        <h1>디시 나만보이는메모장</h1>
+        <p class="slogan">디시 댓글란에 나만 보는 메모를 남깁니다. 이 Chrome에만 보이고 다른 사람은 볼 수 없습니다.</p>
+      </div>
+    </div>
+    <div class="row">
+      <label for="enabled">나만 보기 모드</label>
+      <button id="enabled" class="switch" type="button" role="switch" aria-label="나만 보기 모드" aria-checked="true"></button>
+    </div>
+    <div class="row">
+      <label for="theme">화면 색상</label>
+      <select id="theme">
+        <option value="auto">사이트에 맞춤</option>
+        <option value="light">밝게</option>
+        <option value="dark">어둡게</option>
+      </select>
+    </div>
+    <p class="help">ON: 나만 보는 댓글창 · OFF: 원래 댓글창<br>메모는 꺼도 지워지지 않습니다.</p>
+    <div class="records">
+      <strong>기록 관리</strong>
+      <p id="record-count">저장된 기록을 확인하는 중…</p>
+      <div class="record-actions">
+        <button id="delete-all" class="delete" type="button" disabled>전체 기록 삭제</button>
+        <button id="cancel-delete" class="cancel" type="button" hidden>취소</button>
+      </div>
+      <p>모든 게시물의 메모와 작성 중인 글을 삭제합니다.</p>
+    </div>
+    <p id="status" class="status" role="status"></p>
+  </body>
+</html>

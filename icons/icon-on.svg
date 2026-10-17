@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">디시 나만보이는메모장 켜짐</title>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="#3b4890"/>
+  <path d="M38 30h52c7 0 12 5 12 12v41c0 7-5 12-12 12H60l-20 16V95h-2c-7 0-12-5-12-12V42c0-7 5-12 12-12Z" fill="#fff"/>
+  <path d="M44 52h40M44 69h31" fill="none" stroke="#3b4890" stroke-width="7" stroke-linecap="round"/>
+</svg>
